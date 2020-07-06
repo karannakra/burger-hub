@@ -1,10 +1,7 @@
 import React,{Component}from 'react';
 import Button from '../UI/Button/button';
-import Aux from '../../hoc/Auxiliary';
+import Aux from '../../hoc/auxiliary/Auxiliary';
 class OrderSummary extends Component{
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('[OrderSummary Will]')
-    }
 
     render(){
          const ingredientSummary=Object.keys(this.props.ingredients)
@@ -17,10 +14,9 @@ class OrderSummary extends Component{
                  {ingredientSummary}
              </ul>
              <p>Continue to checkout</p>
-             <div><span style={{marginRight:'270px'}}>
-                   <Button btnType='btn btn-danger' clicked={this.props.purchaseCancel}>CANCEL</Button>
-                        </span>
-                 <Button btnType='btn btn-success' clicked={this.props.purchaseContinue}>CONTINUE</Button>
+             <div>
+                   <Button btnType='Danger' clicked={this.props.purchaseCancel}>CANCEL</Button>
+                 <Button btnType='Success' clicked={this.props.purchaseContinue}>CONTINUE</Button>
              </div>
              <p>Total Payment:<strong>{this.props.price}$</strong></p>
          </Aux>);}

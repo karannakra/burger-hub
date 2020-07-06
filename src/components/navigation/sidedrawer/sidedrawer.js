@@ -3,7 +3,7 @@ import Logo from "../../logo/logo";
 import NavigationItems from "../navigationitem/navigationitem";
 import classes from './sidedrawer.css';
 import BackDrop from "../../UI/backdrop/backdrop";
-import Auxiliary from '../../../hoc/Auxiliary'
+import Auxiliary from '../../../hoc/auxiliary/Auxiliary'
 const sideDrawer=(props)=> {
         let attachedClasses=[classes.SideDrawer,classes.Close];
         if(props.open){
@@ -17,7 +17,7 @@ const sideDrawer=(props)=> {
                <Logo/>
            </div>
            <nav>
-               <NavigationItems/>
+               <NavigationItems isAuthenticated={props.isAuth}/>
            </nav>
        </div>
         </Auxiliary>
@@ -25,7 +25,5 @@ const sideDrawer=(props)=> {
     )
 
 };
-
-
 
 export default sideDrawer;
