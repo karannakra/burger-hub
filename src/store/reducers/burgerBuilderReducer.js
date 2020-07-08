@@ -1,5 +1,5 @@
 import * as actionType from '../actions/typeaction';
-import {updateObjects} from "./utilityReducer";
+import {updateObjects} from "../../shared/utilityReducer";
 
 const INGREDIENT_PRICES = {
     salad: 1,
@@ -27,8 +27,7 @@ const addIngredient=(state,action)=>{
 const removeIngredient=(state,action)=>{
     const updatedIngredient={ [action.ingredientName]: state.ingredients[action.ingredientName] - 1}
     const updatedIngredients=updateObjects(state.ingredients,updatedIngredient)
-    const updatedState=updateObjects(state,{ingredients:updatedIngredients, totalPrice: state.totalPrice +
-            INGREDIENT_PRICES[action.ingredientName],
+    const updatedState=updateObjects(state,{ingredients:updatedIngredients, totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
             building:true
     })
     return updateObjects(state,updatedState)

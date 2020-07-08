@@ -1,5 +1,5 @@
 import  * as actionType from '../actions/typeaction';
-import {updateObjects} from "./utilityReducer";
+import {updateObjects} from "../../shared/utilityReducer";
 
 const initialState={
     token:null,

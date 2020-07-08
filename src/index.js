@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import {createStore,combineReducers,compose,applyMiddleware} from 'redux';
 import {Provider} from 'react-redux'
@@ -10,7 +9,7 @@ import  burgerBuilderReducer from "./store/reducers/burgerBuilderReducer";
 import orderReducer from './store/reducers/ordersReducer';
 import authReducer from './store/reducers/authReducer'
 import thunk from 'redux-thunk';
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = process.env.NODE_ENV==='development'?window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :compose;
 const  rootReducer=combineReducers({
     burgerBuilder:burgerBuilderReducer,
     orders:orderReducer,

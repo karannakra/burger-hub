@@ -4,6 +4,7 @@ import Button from "../../components/UI/Button/button";
 import  {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import classes from './auth.css';
+import {updateObjects} from '../../shared/utilityReducer'
 import Spinner from "../../components/UI/spinner/spinner";
 import * as actions from '../../store/actions';
 class Auth extends Component{
@@ -63,17 +64,16 @@ class Auth extends Component{
         return isValid
     }
     inputChangeHandler=(event,controlName)=> {
-        const updatedControls={
-            ...this.state.controls,
-            [controlName]:{
-                ...this.state.controls[controlName],
+        const updatedControls=updateObjects(this.state.controls,{
+            [controlName]:updateObjects(this.state.controls[controlName],{
                 value:event.target.value,
                 valid:this.checkValidity(event.target.value,this.state.controls[controlName].validation),
                 touched:true
-            }
-        }
+            })
+            });
         this.setState({controls:updatedControls})
-    }
+    };
+
     submitHandler=(event)=>{
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value,this.state.controls.password.value,this.state.isSignup);

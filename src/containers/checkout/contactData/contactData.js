@@ -8,6 +8,7 @@ import axios from "../../../axios";
 import Input from "../../../components/UI/input/input";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import {purchaseBurger} from "../../../store/actions";
+import {updateObjects} from '../../../shared/utilityReducer.js';
 class ContactData extends Component{
     state= {
             orderForm:{
@@ -130,16 +131,14 @@ class ContactData extends Component{
             return isValid
     }
     onChangeHandler=(event,inputIdentifier)=>{
-            const updatedOrderForm={
-                ...this.state.orderForm
-            }
-            const updatedFormElement= {
-                ...updatedOrderForm[inputIdentifier]
-            };
-            updatedFormElement.value=event.target.value;
-            updatedFormElement.touched=true
-            updatedFormElement.valid=this.checkValidity(updatedFormElement.value,updatedFormElement.validation);
-            updatedOrderForm[inputIdentifier]=updatedFormElement;
+            const updatedFormElement=updateObjects(this.state.orderForm[inputIdentifier],{
+                value:event.target.value,
+                touched:true,
+                valid:this.checkValidity(event.target.value,this.state.orderForm[inputIdentifier])
+            })
+            const updatedOrderForm=updateObjects(this.state.orderForm,{
+                [inputIdentifier]:updatedFormElement
+            })
             let formIsValid=true;
             for(let inputIdentity in updatedOrderForm){
                 formIsValid=updatedOrderForm[inputIdentity].valid && formIsValid;

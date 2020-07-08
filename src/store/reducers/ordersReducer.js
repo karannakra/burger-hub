@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/typeaction';
-import {updateObjects} from "./utilityReducer";
+import {updateObjects} from "../../shared/utilityReducer";
 
 const initialState = {
     orders: [],
@@ -52,7 +52,6 @@ const reducer = (state = initialState, action) => {
             return fetchOrderFail(state);
         default:
             return state;
-
     }
 };
 export default reducer;
