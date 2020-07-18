@@ -1,38 +1,41 @@
-import React,{Component} from 'react';
+import React,{useState}from 'react';
 import {connect} from 'react-redux';
 import classes from './Layout.css';
 import Aux from '../auxiliary/Auxiliary';
 import Toolbar from '../../components/navigation/toolbar/toolbar'
 import SideDrawer from "../../components/navigation/sidedrawer/sidedrawer";
 
-class Layout extends Component{
-  state=({
-      showSideDrawer:false
-  })
+const  Layout =(props)=>{
+  // state={
+  //     showSideDrawer:false
+  // }
+    const [showSideDrawer,setSideDrawerState]=useState(false)
 
-    sideDrawerClosedHandler=()=>{
-        this.setState({showSideDrawer:false});
+    const sideDrawerClosedHandler=()=>{
+        // this.setState({showSideDrawer:false});
+        setSideDrawerState(false)
     }
-    SideDrawerToggleHandler=()=> {
-        this.setState((prevState) => {
-            return {showSideDrawer: !prevState.showSideDrawer};
-        });
+    const SideDrawerToggleHandler=()=> {
+        // this.setState((prevState) => {
+        //     return {showSideDrawer: !prevState.showSideDrawer};
+        // });
+        setSideDrawerState(!showSideDrawer)
     }
-    render() {
-        return (
+
+    return (
             <Aux>
                 <Toolbar
-                    isAuth={this.props.isAuthenticated}
-                    drawerToggleClicked={this.SideDrawerToggleHandler}/>
+                    isAuth={props.isAuthenticated}
+                    drawerToggleClicked={SideDrawerToggleHandler}/>
                 <SideDrawer
-                    isAuth={this.props.isAuthenticated}
-                    closed={this.sideDrawerClosedHandler} open={this.state.showSideDrawer}/>
+                    isAuth={props.isAuthenticated}
+                    closed={sideDrawerClosedHandler} open={showSideDrawer}/>
                 <main className={classes.Content}>
-                    {this.props.children}
+                    {props.children}
                 </main>
             </Aux>
         );
-    }
+
 
 }
 const mapStateToProps=(state)=>{
